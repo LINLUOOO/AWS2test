@@ -39,4 +39,8 @@
         ResourceFile.date=#{date}
         where ResourceFile.id=#{id}
     </update>
+
+    <delete id="deleteRFile" parameterType="String">
+        DELETE FROM ResourceFile where ResourceFile.id=#{id};
+    </delete>
 </mapper>

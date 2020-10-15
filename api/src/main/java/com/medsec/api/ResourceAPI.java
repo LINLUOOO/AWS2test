@@ -1,10 +1,14 @@
 package com.medsec.api;
 
 import com.medsec.entity.Resource;
+import com.medsec.entity.ResourceFile;
 import com.medsec.entity.User;
 import com.medsec.filter.Secured;
 import com.medsec.util.Database;
 import com.medsec.util.UserRole;
+
+//import AppointmentAPI.AppointmentNoteAPI;
+
 import org.glassfish.jersey.server.JSONP;
 
 import javax.ws.rs.*;
@@ -12,8 +16,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import com.medsec.util.DefaultRespondEntity;
 import java.util.List;
-import com.medsec.entity.ResourceFile;
 
 /**
  * RESTful APIs for resources.
@@ -127,13 +131,13 @@ public class ResourceAPI {
         Database db = new Database();
         ResourceFile resourcefile = db.selectRFileById(id);//
 
-        if (resourceFile == null)
+        if (resourcefile == null)
             return Response.status(Response.Status.NOT_FOUND).entity(null).build();
 
         if (requestRole != UserRole.ADMIN && !requestUid.equals(resourcefile.getUid()))//
             return Response.status(Response.Status.FORBIDDEN).entity(null).build();
 
-        return Response.ok(resourceFile).build();
+        return Response.ok(resourcefile).build();
     }
     
     private List <ResourceFile> retrieveUserResourceFiles(String uid) {
@@ -142,5 +146,129 @@ public class ResourceAPI {
         return db.listUserResourceFile(uid);//
     }
 
+    
+    
+    @DELETE
+    @Path("resources/{resourceID}/delete")
+    @Secured(UserRole.ADMIN)
+    @JSONP(queryParam = "callback")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteResource(
+            @PathParam("resourceID") String resourceID){
+        Database db=new Database();
+        Resource resource=db.getResource(resourceID);
+        if(resource==null){
+            db.close();
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
+                    .build();
+        }else{
+        	db.deleteResource(resourceID);
+            db.close();
+            return Response.ok(new DefaultRespondEntity()).build();
+        }
+    }
+    
+    @DELETE
+    @Path("resourcefiles/{resourcefileID}/delete")
+    @Secured(UserRole.ADMIN)
+    @JSONP(queryParam = "callback")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteFResource(
+            @PathParam("resourcefileID") String resourcefileID){
+        Database db=new Database();
+        ResourceFile resourcefile=db.selectRFileById(resourcefileID);
+        if(resourcefile==null){
+            db.close();
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
+                    .build();
+        }else{
+        	db.deleteUserResourcefile(resourcefileID);
+            db.close();
+            return Response.ok(new DefaultRespondEntity()).build();
+        }
+    }
+//    @Path("resources/{resourceID}/delete")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public ResourceDelteAPI resourcedeleteAPI(@PathParam("resourceID") String id) {
+//        return new ResourceDelteAPI(id);
+//    }
+//    public class ResourceDelteAPI{
+//        String id;
+//
+//        public ResourceDelteAPI(String id) {
+//            this.id = id;
+//        }
+
+//        @DELETE
+//        @Secured
+//        public Response deleteUserResource(@Context SecurityContext sc) {
+//
+//            User requestUser = (User)sc.getUserPrincipal();
+//            UserRole requestRole = requestUser.getRole();
+//            String requestUid = requestUser.getId();
+//
+//            Database db = new Database(true);
+//            Resource resource = db.getResource(id);
+//
+//            if (resource == null)
+//                return Response.status(Response.Status.NOT_FOUND).entity(null).build();
+//
+//            if (requestRole != UserRole.ADMIN && !requestUid.equals(resource.getUid()))
+//                return Response.status(Response.Status.FORBIDDEN).entity(null).build();
+//
+//            db.deleteResource(id);
+//
+//            db.close();
+//            db.close();
+//
+//            return Response.ok(new DefaultRespondEntity()).build();
+//        }
+//        
+//
+//    }
+    
+//    
+//    @Path("resourcefiles/{resourcefileID}/delete")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public ResourceFDelteAPI resourcefdeleteAPI(@PathParam("resourcefileID") String id) {
+//        return new ResourceFDelteAPI(id);
+//    }
+//    
+//    public class ResourceFDelteAPI{
+//        String id;
+//
+//        public ResourceFDelteAPI(String id) {
+//            this.id = id;
+//        }
+//
+//    @DELETE
+//    @Secured
+//    public Response deleteUserResourceFile(@Context SecurityContext sc) {
+//
+//        User requestUser = (User)sc.getUserPrincipal();
+//        UserRole requestRole = requestUser.getRole();
+//        String requestUid = requestUser.getId();
+//
+//        Database db = new Database(true);
+//        ResourceFile resourcefile = db.selectRFileById(id);
+//
+//        if (resourcefile == null)
+//            return Response.status(Response.Status.NOT_FOUND).entity(null).build();
+//
+//        if (requestRole != UserRole.ADMIN && !requestUid.equals(resourcefile.getUid()))
+//            return Response.status(Response.Status.FORBIDDEN).entity(null).build();
+//
+//        db.deleteUserResourcefile(id);
+//
+//        db.close();
+//        db.close();
+//
+//        return Response.ok(new DefaultRespondEntity()).build();
+//    }
+//    }
 
 }
