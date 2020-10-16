@@ -6,10 +6,13 @@ import com.medsec.entity.User;
 import com.medsec.filter.Secured;
 import com.medsec.util.Database;
 import com.medsec.util.UserRole;
+import com.medsec.util.*;
+
 
 //import AppointmentAPI.AppointmentNoteAPI;
 
 import org.glassfish.jersey.server.JSONP;
+import com.medsec.util.ArgumentException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -18,6 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import com.medsec.util.DefaultRespondEntity;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * RESTful APIs for resources.
@@ -150,8 +154,9 @@ public class ResourceAPI {
     
     @DELETE
     @Path("resources/{resourceID}/delete")
-    @Secured(UserRole.ADMIN)
-    @JSONP(queryParam = "callback")
+    // @Secured(UserRole.ADMIN)
+    @Secured
+    // @JSONP(queryParam = "callback")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteResource(
             @PathParam("resourceID") String resourceID){
@@ -172,8 +177,9 @@ public class ResourceAPI {
     
     @DELETE
     @Path("resourcefiles/{resourcefileID}/delete")
-    @Secured(UserRole.ADMIN)
-    @JSONP(queryParam = "callback")
+    // @Secured(UserRole.ADMIN)
+    @Secured
+    // @JSONP(queryParam = "callback")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteFResource(
             @PathParam("resourcefileID") String resourcefileID){
