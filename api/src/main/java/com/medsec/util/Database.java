@@ -160,20 +160,20 @@ public class Database {
 //        }
 //    }
     
-//     public void deleteUserResourcefile(String resourcefile_id) {
-//         try {
-//             ResourceFileMapper mapper = session.getMapper(ResourceFileMapper.class);
-//             mapper.deleteRFile(resourcefile_id);
-// //            ResourceFile resourcefile = new ResourceFile()
-// //                    .id(resourcefile_id)
-// //                    .title(null);
-// //            resourcefile = null;
-// //            mapper.updateRFile(resourcefile);
-//             session.commit();
-//         } finally {
-//             if (!keepAlive) close();
-//         }
-//     }
+    public void deleteUserResourcefile(String resourcefile_id) {
+        try {
+            ResourceFileMapper mapper = session.getMapper(ResourceFileMapper.class);
+            mapper.deleteRFile(resourcefile_id);
+//            ResourceFile resourcefile = new ResourceFile()
+//                    .id(resourcefile_id)
+//                    .title(null);
+//            resourcefile = null;
+//            mapper.updateRFile(resourcefile);
+            session.commit();
+        } finally {
+            if (!keepAlive) close();
+        }
+    }
     
     
     public void updateAppointmentStatus(String appointment_id, AppointmentStatus status) {

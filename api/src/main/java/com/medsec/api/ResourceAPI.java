@@ -152,51 +152,51 @@ public class ResourceAPI {
 
     
     
-    // @DELETE
-    // @Path("resources/{resourceID}/delete")
-    // // @Secured(UserRole.ADMIN)
-    // @Secured
-    // // @JSONP(queryParam = "callback")
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public Response deleteResource(
-    //         @PathParam("resourceID") String resourceID){
-    //     Database db=new Database();
-    //     Resource resource=db.getResource(resourceID);
-    //     if(resource==null){
-    //         db.close();
-    //         return Response
-    //                 .status(Response.Status.NOT_FOUND)
-    //                 .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
-    //                 .build();
-    //     }else{
-    //     	db.deleteResource(resourceID);
-    //         db.close();
-    //         return Response.ok(new DefaultRespondEntity()).build();
-    //     }
-    // }
+    @DELETE
+    @Path("resources/{resourceID}/delete")
+    // @Secured(UserRole.ADMIN)
+    @Secured
+    // @JSONP(queryParam = "callback")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteResource(
+            @PathParam("resourceID") String resourceID){
+        Database db=new Database();
+        Resource resource=db.getResource(resourceID);
+        if(resource==null){
+            db.close();
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
+                    .build();
+        }else{
+        	db.deleteResource(resourceID);
+            db.close();
+            return Response.ok(new DefaultRespondEntity()).build();
+        }
+    }
     
-    // @DELETE
-    // @Path("resourcefiles/{resourcefileID}/delete")
-    // // @Secured(UserRole.ADMIN)
-    // @Secured
-    // // @JSONP(queryParam = "callback")
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public Response deleteFResource(
-    //         @PathParam("resourcefileID") String resourcefileID){
-    //     Database db=new Database();
-    //     ResourceFile resourcefile=db.selectRFileById(resourcefileID);
-    //     if(resourcefile==null){
-    //         db.close();
-        //     return Response
-        //             .status(Response.Status.NOT_FOUND)
-        //             .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
-        //             .build();
-        // }else{
-        // 	db.deleteUserResourcefile(resourcefileID);
-        //     db.close();
-        //     return Response.ok(new DefaultRespondEntity()).build();
-        // }
-    // }
+    @DELETE
+    @Path("resourcefiles/{resourcefileID}/delete")
+    // @Secured(UserRole.ADMIN)
+    @Secured
+    // @JSONP(queryParam = "callback")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteFResource(
+            @PathParam("resourcefileID") String resourcefileID){
+        Database db=new Database();
+        ResourceFile resourcefile=db.selectRFileById(resourcefileID);
+        if(resourcefile==null){
+            db.close();
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
+                    .build();
+        }else{
+        	db.deleteUserResourcefile(resourcefileID);
+            db.close();
+            return Response.ok(new DefaultRespondEntity()).build();
+        }
+    }
 //    @Path("resources/{resourceID}/delete")
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public ResourceDelteAPI resourcedeleteAPI(@PathParam("resourceID") String id) {
