@@ -9,7 +9,7 @@ import com.medsec.util.UserRole;
 import com.medsec.util.DefaultRespondEntity;
 import com.medsec.util.ArgumentException;
 
-import com.medsec.util.ArgumentException;
+// import com.medsec.util.ArgumentException;
 
 //import AppointmentAPI.AppointmentNoteAPI;
 
@@ -168,7 +168,9 @@ public class ResourceAPI {
                     .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
                     .build();
         }else{
-        	db.deleteResource(resourceID);
+            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+            db.deleteResource(resourceID);
+            System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }

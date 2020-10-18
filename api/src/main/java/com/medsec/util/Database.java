@@ -463,8 +463,10 @@ public class Database {
 
     public void deleteResource(String resourceID){
         try {
+            System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
             ResourceMapper mapper=session.getMapper(ResourceMapper.class);
             mapper.deleteResource(resourceID);
+            System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             session.commit();
         } finally {
             if (!keepAlive) close();

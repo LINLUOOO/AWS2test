@@ -12,6 +12,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class resourcepdfdetail extends StatefulWidget {
   final PdfResourcefile _pdfresource;
@@ -49,6 +51,16 @@ class _resourcepdfdetailState extends State<resourcepdfdetail> {
             brightness: Brightness.light,
 //            backgroundColor: Colors.transparent,
             elevation: 0.5,
+            actions: <Widget>[
+              Text("Share",
+                  style: TextStyle(color: Colors.black, fontSize: 18)),
+              IconButton(
+                color: Colors.black,
+                icon: Icon(Icons.share),
+                tooltip: 'share',
+                onPressed: () async => await _sharepdfFromUrl(),
+              )
+            ],
           )),
       body: new Builder(builder: (BuildContext context) {
         return new Container(
@@ -60,6 +72,29 @@ class _resourcepdfdetailState extends State<resourcepdfdetail> {
             child: _buildCard(_resourcepdfState.title, _resourcepdfState.link));
       }),
     );
+  }
+
+  Future<void> _sharepdfFromUrl() async {
+    String currentToken = await Authentication.getCurrentToken();
+    print(currentToken);
+    var fileId = _resourcepdfState.id.toString();
+    String auth = "Bearer " + currentToken;
+    var url = ServerDetails.ip +
+        ':' +
+        ServerDetails.port +
+        ServerDetails.api +
+        'resourcefile/link/' +
+        fileId;
+    try {
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      request.headers.add("Authorization", auth);
+      var response = await request.close();
+      print(response.statusCode);
+      Uint8List bytes = await consolidateHttpClientResponseBytes(response);
+      await Share.file('ESYS AMLOG', 'sample.pdf', bytes, 'text/pdf');
+    } catch (e) {
+      print('error: $e');
+    }
   }
 
   getPdfDetails() async {

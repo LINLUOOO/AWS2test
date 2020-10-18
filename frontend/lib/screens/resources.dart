@@ -203,6 +203,7 @@ class _ResourcesState extends State<Resources> {
                                   element is PdfResourcefile
                                       ? _deletePdf(element)
                                       : _deleteNotPdf(element);
+                                  Navigator.of(context).pushNamed("/resources");
                                 },
                               ),
                               // FlatButton(
