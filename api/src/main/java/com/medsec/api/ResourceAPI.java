@@ -169,7 +169,7 @@ public class ResourceAPI {
                     .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
                     .build();
         }else{
-        	db.deleteResource(resourceID);
+        	db.deleteUserResource(resourceID);
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }

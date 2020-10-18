@@ -146,29 +146,29 @@ public class Database {
         }
     }
 
-//    public void deleteUserResource(String resource_id) {
-//        try {
-//            ResourceMapper mapper = session.getMapper(ResourceMapper.class);
-////            Resource resource = new Resource()
-////                    .id(resource_id)
-////                    .name(null);
-////            resource = null;
-//            mapper.deleteResource(resource_id);
-//            session.commit();
-//        } finally {
-//            if (!keepAlive) close();
-//        }
-//    }
+   public void deleteUserResource(String resource_id) {
+       try {
+           ResourceMapper mapper = session.getMapper(ResourceMapper.class);
+           Resource resource1 = new Resource()
+                   .id(resource_id)
+                   .name(null);
+           resource1 = null;
+           mapper.updateResource(resource1);
+           session.commit();
+       } finally {
+           if (!keepAlive) close();
+       }
+   }
     
     public void deleteUserResourcefile(String resourcefile_id) {
         try {
             ResourceFileMapper mapper = session.getMapper(ResourceFileMapper.class);
-            mapper.deleteRFile(resourcefile_id);
-//            ResourceFile resourcefile = new ResourceFile()
-//                    .id(resourcefile_id)
-//                    .title(null);
-//            resourcefile = null;
-//            mapper.updateRFile(resourcefile);
+            // mapper.deleteRFile(resourcefile_id);
+           ResourceFile resourcefile1 = new ResourceFile()
+                   .id(resourcefile_id)
+                   .title(null);
+           resourcefile1 = null;
+           mapper.updateRFile(resourcefile1);
             session.commit();
         } finally {
             if (!keepAlive) close();

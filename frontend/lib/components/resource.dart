@@ -1,13 +1,15 @@
 class Resource {
   final String name;
+  final String id;
   final String website; //include: website and text
   final DateTime date;
 
-  Resource({this.name, this.website, this.date});
+  Resource({this.name, this.id, this.website, this.date});
 
   factory Resource.fromJson(Map<String, dynamic> json) {
     return Resource(
         name: json['name'],
+        id: json['id'],
         website: json['content'],
         date: DateTime.parse(json['date']));
   }
