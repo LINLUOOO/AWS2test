@@ -170,7 +170,7 @@ public class ResourceAPI {
         }else{
             System.out.println(resource);
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-            db.deleteAPPResource(id);
+            db.deleteAPPResource(resource);
             System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();
