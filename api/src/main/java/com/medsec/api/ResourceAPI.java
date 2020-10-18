@@ -155,7 +155,7 @@ public class ResourceAPI {
     @Path("resources/{id}/delete")
     //@Secured(UserRole.ADMIN)
     @Secured
-    @JSONP(queryParam = "callback")
+    // @JSONP(queryParam = "callback")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteResource(
             @PathParam("id") String id){
@@ -168,6 +168,7 @@ public class ResourceAPI {
                     .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
                     .build();
         }else{
+            System.out.println(resource);
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             db.deleteAPPResource(id);
             System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
