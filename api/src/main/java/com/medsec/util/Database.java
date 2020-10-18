@@ -479,7 +479,7 @@ public class Database {
             System.out.println(id);
             System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
             ResourceMapper mapper=session.getMapper(ResourceMapper.class);
-            mapper.deleteResource(id);
+            mapper.deleteAPPResource(id);
             System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             session.commit();
         } finally {
