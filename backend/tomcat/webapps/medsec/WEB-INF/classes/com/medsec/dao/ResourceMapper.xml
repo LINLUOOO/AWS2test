@@ -22,6 +22,7 @@
         delete from Resource where Resource.id=#{id}
     </delete>
 
+
     <update id="updateResource" parameterType="com.medsec.entity.Resource">
         UPDATE Resource SET
         Resource.name= #{name},
