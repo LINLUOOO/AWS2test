@@ -43,4 +43,6 @@
     <delete id="deleteRFile" parameterType="String">
         DELETE FROM ResourceFile where ResourceFile.id=#{id};
     </delete>
+
+   
 </mapper>

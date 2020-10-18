@@ -463,9 +463,23 @@ public class Database {
 
     public void deleteResource(String resourceID){
         try {
-            System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+            System.out.println(resourceID);
+            // System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
             ResourceMapper mapper=session.getMapper(ResourceMapper.class);
             mapper.deleteResource(resourceID);
+            // System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+            session.commit();
+        } finally {
+            if (!keepAlive) close();
+        }
+    }
+
+    public void deleteAPPResource(String id){
+        try {
+            System.out.println(id);
+            System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+            ResourceMapper mapper=session.getMapper(ResourceMapper.class);
+            mapper.deleteResource(id);
             System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             session.commit();
         } finally {

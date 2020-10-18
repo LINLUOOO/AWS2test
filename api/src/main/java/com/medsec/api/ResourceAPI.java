@@ -152,15 +152,15 @@ public class ResourceAPI {
     
     
     @DELETE
-    @Path("resources/{resourceID}/delete")
+    @Path("resources/{id}/delete")
     //@Secured(UserRole.ADMIN)
     @Secured
     @JSONP(queryParam = "callback")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteResource(
-            @PathParam("resourceID") String resourceID){
+            @PathParam("id") String id){
         Database db=new Database();
-        Resource resource=db.getResource(resourceID);
+        Resource resource=db.getResource(id);
         if(resource==null){
             db.close();
             return Response
@@ -169,7 +169,7 @@ public class ResourceAPI {
                     .build();
         }else{
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-            db.deleteResource(resourceID);
+            db.deleteAPPResource(id);
             System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();

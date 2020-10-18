@@ -30,4 +30,9 @@
         Resource.date= #{date}
         WHERE Resource.id= #{id}
     </update>
+
+    <delete id="deleteAPPResource" parameterType="String">
+        delete from Resource where Resource.id=#{id}
+    </delete>
+     
 </mapper>
