@@ -181,22 +181,20 @@ public class ResourceAPI {
     @Path("resourcefiles/{resourcefileID}/delete")
     //@Secured(UserRole.ADMIN)
     @Secured
-    @JSONP(queryParam = "callback")
+    // @JSONP(queryParam = "callback")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteFResource(
             @PathParam("resourcefileID") String resourcefileID){
-        Database db=new Database();
+        Database db=new Database(true);
         ResourceFile resourcefile=db.selectRFileById(resourcefileID);
         if(resourcefile==null){
-            System.out.println("sourcefilenull~~~~~~~~~~~~~~~~~~~~~");
             db.close();
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
                     .build();
         }else{
-            System.out.println("deleteresourcefile~~~~~~~~~~~~~~~~~~~~~");
-            db.deleteUserResourcefile(resourcefileID);
+            db.deleteUserResourcefile(resourcefile);
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }

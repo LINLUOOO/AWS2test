@@ -13,5 +13,5 @@ public interface ResourceFileMapper {
     String getRFileLink(String id);
     void insertRFile(ResourceFile file);
     void updateRFile(ResourceFile file);
-    void deleteRFile(String id);
+    void deleteRFile(ResourceFile file);
 }

@@ -40,7 +40,7 @@
         where ResourceFile.id=#{id}
     </update>
 
-    <delete id="deleteRFile" parameterType="String">
+    <delete id="deleteRFile" parameterType="com.medsec.entity.ResourceFile">
         DELETE FROM ResourceFile where ResourceFile.id=#{id};
     </delete>
 

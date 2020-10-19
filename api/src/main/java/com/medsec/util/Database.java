@@ -160,10 +160,10 @@ public class Database {
 //        }
 //    }
     
-    public void deleteUserResourcefile(String resourcefile_id) {
+    public void deleteUserResourcefile(ResourceFile resourcefile) {
         try {
             ResourceFileMapper mapper = session.getMapper(ResourceFileMapper.class);
-            mapper.deleteRFile(resourcefile_id);
+            mapper.deleteRFile(resourcefile);
 //            ResourceFile resourcefile = new ResourceFile()
 //                    .id(resourcefile_id)
 //                    .title(null);
