@@ -159,7 +159,7 @@ public class ResourceAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteResource(
             @PathParam("id") String id){
-        Database db=new Database();
+        Database db=new Database(true);
         Resource resource=db.getResource(id);
         if(resource==null){
             db.close();
@@ -172,7 +172,7 @@ public class ResourceAPI {
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             db.deleteAPPResource(resource);
             System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
-            // db.close();
+            db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }
     }
