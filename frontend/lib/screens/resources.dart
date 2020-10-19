@@ -10,6 +10,8 @@ import 'package:frontend/screens/resourcedetail.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../main.dart';
+
 class Resources extends StatefulWidget {
   @override
   _ResourcesState createState() => _ResourcesState();
@@ -162,32 +164,37 @@ class _ResourcesState extends State<Resources> {
                                   size: 30.0,
                                   color: Colors.blue.withOpacity(1.0)))
                     ]),
-                    title: element is PdfResourcefile
-                        ? Text(element.title,
-                            style: TextStyle(
-                              color: Colors.blue.withOpacity(1.0),
-                              fontWeight: FontWeight.bold,
-                            ))
-                        : Text(element.name,
-                            style: TextStyle(
-                              color: Colors.blue.withOpacity(1.0),
-                              fontWeight: FontWeight.bold,
-                            )),
-
-                    //subtitle: Icon(Icons.arrow_right),
-                    onTap: () {
+                    title: Column(children: <Widget>[
                       element is PdfResourcefile
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      resourcepdfdetail(element)))
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      resourcedetail(element)));
-                    },
+                          ? new InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            resourcepdfdetail(element)));
+                              },
+                              child: new Text(element.title,
+                                  style: TextStyle(
+                                    color: Colors.blue.withOpacity(1.0),
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            )
+                          : new InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            resourcedetail(element)));
+                              },
+                              child: new Text(element.name,
+                                  style: TextStyle(
+                                    color: Colors.blue.withOpacity(1.0),
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ),
+                    ]),
                     trailing: IconButton(
                         icon: Icon(Icons.delete_forever),
                         onPressed: () {
@@ -203,7 +210,12 @@ class _ResourcesState extends State<Resources> {
                                   element is PdfResourcefile
                                       ? _deletePdf(element)
                                       : _deleteNotPdf(element);
-                                  Navigator.of(context).pushNamed("/resources");
+                                  // Navigator.of(context).pushNamed("/resources");
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              MainPage()),
+                                      (Route<dynamic> route) => false);
                                 },
                               ),
                               // FlatButton(

@@ -172,7 +172,7 @@ public class ResourceAPI {
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             db.deleteAPPResource(resource);
             System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
-            db.close();
+            // db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }
     }
@@ -188,13 +188,15 @@ public class ResourceAPI {
         Database db=new Database();
         ResourceFile resourcefile=db.selectRFileById(resourcefileID);
         if(resourcefile==null){
+            System.out.println("sourcefilenull~~~~~~~~~~~~~~~~~~~~~");
             db.close();
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(new DefaultRespondEntity("resource that to be deleted doesn't existed in db"))
                     .build();
         }else{
-        	db.deleteUserResourcefile(resourcefileID);
+            System.out.println("deleteresourcefile~~~~~~~~~~~~~~~~~~~~~");
+            db.deleteUserResourcefile(resourcefileID);
             db.close();
             return Response.ok(new DefaultRespondEntity()).build();
         }
