@@ -26,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
       new TextEditingController();
   final TextEditingController newPasswordController =
       new TextEditingController();
+  final TextEditingController getpasswordController =
+      new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -524,8 +526,8 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: <Widget>[
-                  Text('Please contact your clinic'),
-                  Text('Ph: 0415181703'),
+                  Text('Send the password to your email?'),
+                  // Text('Ph: 0415181703'),
                 ],
               )),
           actions: <Widget>[
@@ -536,9 +538,9 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             FlatButton(
-              child: Text('Call'),
-              onPressed: () => launch("tel://0415181703"),
-            ),
+                child: Text('Yes'),
+                // onPressed: () => launch("tel://0415181703"),
+                onPressed: () {}),
           ],
         );
       },

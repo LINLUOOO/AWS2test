@@ -228,12 +228,13 @@ public class UserAPI {
             @Context SecurityContext sc,
             @PathParam("email") String email) {
 
-        User requestUser = (User) sc.getUserPrincipal();
+        Database db = new Database();
+        User user = db.getUserByEmail(email);
 
-        if (requestUser == null)
+        if (user == null)
             return Response.status(Response.Status.NOT_FOUND).entity(null).build();
 
-        return Response.ok(requestUser).build();
+        return Response.ok(user).build();
     }
 
 
@@ -317,4 +318,5 @@ public class UserAPI {
     }
 
 }
+
 
